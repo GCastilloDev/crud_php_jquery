@@ -7,40 +7,46 @@ function leerAlumnos() {
 
 function agregarAlumno() {
   //Variables
-  var apellidoPaterno = $('#apPaterno').val();
-  var apellidoMaterno = $('#apMaterno').val();
+  var matricula = $('#matricula').val();
   var nombre = $('#nombre').val();
-  var primerParcial = $('#primerParcial').val();
-  var segundoParcial = $('#segundoParcial').val();
-  var tercerParcial = $('#tercerParcial').val();
-  var final =
-    (parseFloat(primerParcial) +
-      parseFloat(primerParcial) +
-      parseFloat(tercerParcial)) /
-    3;
-  var promedio = final.toFixed(2);
+  var apellidos = $('#apellidos').val();
+  var edad = $('#edad').val();
+  var sexo = $('#sexo').val();
+  var grupo = $('#grupo').val();
+  var carrera = $('#carrera').val();
+  var calificacionParcial = $('#calificacionParcial').val();
+  var notaFinal = $('#notaFinal').val();
+
+  var suma = (parseFloat(calificacionParcial) + parseFloat(notaFinal)) / 2;
+  var promedio = suma.toFixed(2);
 
   if (
-    apellidoPaterno == '' ||
-    apellidoMaterno == '' ||
+    matricula == '' ||
     nombre == '' ||
-    primerParcial == '' ||
-    segundoParcial == '' ||
-    tercerParcial == ''
+    apellidos == '' ||
+    edad == '' ||
+    sexo == '' ||
+    grupo == '' ||
+    carrera == '' ||
+    calificacionParcial == '' ||
+    notaFinal == ''
   ) {
-    alert("Tiene que llenar todos los campos");
+    alert('Tiene que llenar todos los campos');
     return true;
   }
 
   $.post(
     'ajax/agregarAlumno.php',
     {
-      apellidoPaterno: apellidoPaterno,
-      apellidoMaterno: apellidoMaterno,
+      matricula: matricula,
       nombre: nombre,
-      primerParcial: primerParcial,
-      segundoParcial: segundoParcial,
-      tercerParcial: tercerParcial,
+      apellidos: apellidos,
+      edad: edad,
+      sexo: sexo,
+      grupo: grupo,
+      carrera: carrera,
+      calificacionParcial: calificacionParcial,
+      notaFinal: notaFinal,
       promedio: promedio,
     },
     function (data, status) {
@@ -78,12 +84,15 @@ function obtenerDetalleAlumno(id) {
       // PARSE json data
       var alumno = JSON.parse(data);
       // Assing existing values to the modal popup fields
-      $('#uApellidoPaterno').val(alumno.apellido_paterno);
-      $('#uApellidoMaterno').val(alumno.apellido_materno);
+      $('#uMatricula').val(alumno.matricula);
       $('#uNombre').val(alumno.nombre);
-      $('#uPrimerParcial').val(alumno.primer_parcial);
-      $('#uSegundoParcial').val(alumno.segundo_parcial);
-      $('#uTercerParcial').val(alumno.tercer_parcial);
+      $('#uApellidos').val(alumno.apellidos);
+      $('#uEdad').val(alumno.edad);
+      $('#uSexo').val(alumno.sexo);
+      $('#uGrupo').val(alumno.grupo);
+      $('#uCarrera').val(alumno.carrera);
+      $('#uCalificacionParcial').val(alumno.calificacion_parcial);
+      $('#uNotaFinal').val(alumno.nota_final);
     }
   );
 
@@ -91,34 +100,37 @@ function obtenerDetalleAlumno(id) {
 }
 
 function actualizarAlumno() {
-  var apellidoPaterno = $('#uApellidoPaterno').val();
-  var apellidoMaterno = $('#uApellidoMaterno').val();
-  var nombre = $('#uNombre').val();
-  var primerParcial = $('#uPrimerParcial').val();
-  var segundoParcial = $('#uSegundoParcial').val();
-  var tercerParcial = $('#uTercerParcial').val();
-  var final =
-    (parseFloat(primerParcial) +
-      parseFloat(primerParcial) +
-      parseFloat(tercerParcial)) /
-    3;
-
-  var promedio = final.toFixed(2);
   var idAlumno = $('#alumnoID').val();
+  var matricula = $('#uMatricula').val();
+  var nombre = $('#uNombre').val();
+  var apellidos = $('#uApellidos').val();
+  var edad = $('#uEdad').val();
+  var sexo = $('#uSexo').val();
+  var grupo = $('#uGrupo').val();
+  var carrera = $('#uCarrera').val();
+  var calificacionParcial = $('#uCalificacionParcial').val();
+  var notaFinal = $('#uNotaFinal').val();
+
+  var suma = (parseFloat(calificacionParcial) + parseFloat(notaFinal)) / 2;
+  var promedio = suma.toFixed(2);
 
   $.post(
     'ajax/actualizarAlumno.php',
     {
       id: idAlumno,
-      apellidoPaterno: apellidoPaterno,
-      apellidoMaterno: apellidoMaterno,
+      matricula: matricula,
       nombre: nombre,
-      primerParcial: primerParcial,
-      segundoParcial: segundoParcial,
-      tercerParcial: tercerParcial,
+      apellidos: apellidos,
+      edad: edad,
+      sexo: sexo,
+      grupo: grupo,
+      carrera: carrera,
+      calificacionParcial: calificacionParcial,
+      notaFinal: notaFinal,
       promedio: promedio,
     },
     function (data, status) {
+      console.log(data);
       // hide modal popup
       $('#modalEditar').modal('hide');
       // reload Users by using readRecords();
@@ -128,12 +140,15 @@ function actualizarAlumno() {
 }
 
 function reestablecer() {
-  $('#apPaterno').val('');
-  $('#apMaterno').val('');
+  $('#matricula').val('');
   $('#nombre').val('');
-  $('#primerParcial').val('');
-  $('#segundoParcial').val('');
-  $('#tercerParcial').val('');
+  $('#apellidos').val('');
+  $('#edad').val('');
+  $('#sexo').val('');
+  $('#grupo').val('');
+  $('#carrera').val('');
+  $('#calificacionParcial').val('');
+  $('#notaFinal').val('');
 }
 
 $(document).ready(function () {

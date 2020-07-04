@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-07-2020 a las 03:47:00
+-- Tiempo de generación: 04-07-2020 a las 18:28:40
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.2.31
 
@@ -31,13 +31,16 @@ USE `calificaciones_alumnos`;
 
 CREATE TABLE `alumnos` (
   `id` int(11) NOT NULL,
-  `apellido_paterno` varchar(50) NOT NULL,
-  `apellido_materno` varchar(50) NOT NULL,
+  `matricula` int(8) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `primer_parcial` double NOT NULL,
-  `segundo_parcial` double NOT NULL,
-  `tercer_parcial` double NOT NULL,
-  `final` double NOT NULL
+  `apellidos` varchar(50) NOT NULL,
+  `edad` int(2) NOT NULL,
+  `sexo` varchar(50) NOT NULL,
+  `grupo` int(4) NOT NULL,
+  `carrera` varchar(100) NOT NULL,
+  `calificacion_parcial` double NOT NULL,
+  `nota_final` double NOT NULL,
+  `promedio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -83,7 +86,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

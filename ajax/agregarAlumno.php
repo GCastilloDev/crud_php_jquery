@@ -4,32 +4,41 @@ if (isset($_POST)) {
 
     include('conexionBD.php');
 
-    $apellidoPaterno = $_POST["apellidoPaterno"];
-    $apellidoMaterno = $_POST["apellidoMaterno"];
+    $matricula = $_POST["matricula"];
     $nombre = $_POST["nombre"];
-    $primerParcial = $_POST["primerParcial"];
-    $segundoParcial = $_POST["segundoParcial"];
-    $tercerParcial = $_POST["tercerParcial"];
-    $final = $_POST["promedio"];
-
+    $apellidos = $_POST["apellidos"];
+    $edad = $_POST["edad"];
+    $sexo = $_POST["sexo"];
+    $grupo = $_POST["grupo"];
+    $carrera = $_POST["carrera"];
+    $calificacionParcial = $_POST["calificacionParcial"];
+    $notaFinal = $_POST["notaFinal"];
+    $promedio = $_POST["promedio"];
+    
     $query = "INSERT INTO 
                   alumnos(
-                  apellido_paterno,
-                  apellido_materno,
+                  matricula,
                   nombre,
-                  primer_parcial,
-                  segundo_parcial,
-                  tercer_parcial,
-                  final
+                  apellidos,
+                  edad,
+                  sexo,
+                  grupo,
+                  carrera,
+                  calificacion_parcial,
+                  nota_final,
+                  promedio
                   ) VALUES
                   (
-                      '$apellidoPaterno',
-                      '$apellidoMaterno',
+                      '$matricula',
                       '$nombre',
-                      '$primerParcial',
-                      '$segundoParcial',
-                      '$tercerParcial',
-                      '$final'
+                      '$apellidos',
+                      '$edad',
+                      '$sexo',
+                      '$grupo',
+                      '$carrera',
+                      '$calificacionParcial',
+                      '$notaFinal',
+                      '$promedio'
                   )";
 
     if (!$result = mysqli_query($con, $query)) {
